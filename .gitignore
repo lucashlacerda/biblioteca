@@ -1,0 +1,64 @@
+# Arquivos e diretórios a serem ignorados no projeto C++
+# Code::Blocks
+
+# Arquivos binários e de compilação
+*.o
+*.obj
+*.a
+*.exe
+*.dll
+*.so
+*.out
+
+# Diretório de saída de compilação
+bin/
+bin-debug/
+bin-release/
+bin-int/
+output/
+
+# Diretório de objeto do Code::Blocks
+objs/
+src/objs/
+
+# Diretório de bibliotecas
+lib/
+lib-debug/
+lib-release/
+lib-int/
+
+# Arquivos de configuração do Code::Blocks
+*.depend
+*.layout
+*.depend.xml
+*.project
+*.workspace
+
+# Arquivos temporários e de backup
+*.~c
+*.~d
+*.~h
+*.~cpp
+*~
+
+# Arquivos de sistema e de configuração
+Thumbs.db
+.DS_Store
+.project
+
+# Arquivos de log
+*.log
+
+# Arquivos de saída de depuração do GDB
+*.gdb
+
+# Ignore diretórios de depuração
+Debug/
+debug/
+Release/
+release/
+
+# Arquivos de usuário (gerados pelo usuário)
+user
+.workspace
+layout
