@@ -21,23 +21,26 @@ struct Estante {
 
 Ordenacao tipoOrdenacao = POR_TITULO;
 
+// Função para imprimir a lista de livros
 void ImprimeLista(Estante* head) {
     Estante* aux = head->prox;
     while (aux != nullptr) {
         if (aux->livro != nullptr) {
-            cout << "Titulo: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponivel: " << (aux->livro->disponivel ? "Sim" : "Nao") << endl;
+            cout << "Título: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponível: " << (aux->livro->disponivel ? "Sim" : "Não") << endl;
         }
         aux = aux->prox;
     }
 }
 
-void criaEstante(Estante*& e) {
+// Função para criar uma nova estante
+void CriaEstante(Estante*& e) {
     e = new Estante;
     e->livro = nullptr;
     e->prox = nullptr;
 }
 
-void criaLivro(Livro*& l, string titulo, string autor, int isbn) {
+// Função para criar um novo livro
+void CriaLivro(Livro*& l, string titulo, string autor, int isbn) {
     l = new Livro;
     l->titulo = titulo;
     l->autor = autor;
@@ -45,10 +48,11 @@ void criaLivro(Livro*& l, string titulo, string autor, int isbn) {
     l->disponivel = true;
 }
 
-void insereLivroNaEstante(Estante*& head, Livro* l) {
+// Função para inserir um livro na estante
+void InsereLivroNaEstante(Estante*& head, Livro* l) {
     Estante* aux = head;
     Estante* novo;
-    criaEstante(novo);
+    CriaEstante(novo);
     novo->livro = l;
 
     if (aux->prox == nullptr) { // Se a estante está vazia
@@ -70,7 +74,8 @@ void insereLivroNaEstante(Estante*& head, Livro* l) {
     ImprimeLista(head);
 }
 
-void removeLivroDaEstante(Estante*& head, int isbn) {
+// Função para remover um livro da estante
+void RemoveLivroDaEstante(Estante*& head, int isbn) {
     Estante* aux = head;
     Estante* exc = nullptr;
 
@@ -79,7 +84,7 @@ void removeLivroDaEstante(Estante*& head, int isbn) {
     }
 
     if (aux->prox == nullptr) {
-        cout << "O livro nao esta na estante" << endl;
+        cout << "O livro não está na estante" << endl;
     }
     else {
         exc = aux->prox;
@@ -91,7 +96,8 @@ void removeLivroDaEstante(Estante*& head, int isbn) {
     ImprimeLista(head);
 }
 
-void atualizaStatusLivro(Estante*& head, int isbn) {
+// Função para atualizar o status de um livro (empréstimo/devolução)
+void AtualizaStatusLivro(Estante*& head, int isbn) {
     Estante* aux = head;
 
     while (aux->prox != nullptr && aux->prox->livro->isbn != isbn) {
@@ -99,7 +105,7 @@ void atualizaStatusLivro(Estante*& head, int isbn) {
     }
 
     if (aux->prox == nullptr) {
-        cout << "O livro nao esta na estante" << endl;
+        cout << "O livro não está na estante" << endl;
     }
     else {
         aux = aux->prox;
@@ -109,38 +115,41 @@ void atualizaStatusLivro(Estante*& head, int isbn) {
     ImprimeLista(head);
 }
 
-void buscaPorTitulo(Estante* head, const string& titulo) {
+// Função para buscar um livro pelo título
+void BuscaPorTitulo(Estante* head, const string& titulo) {
     Estante* aux = head;
     while (aux != nullptr) {
         if (aux->livro != nullptr && aux->livro->titulo == titulo) {
             cout << "Livro encontrado:" << endl;
-            cout << "Titulo: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponivel: " << (aux->livro->disponivel ? "Sim" : "Nao") << endl;
+            cout << "Título: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponível: " << (aux->livro->disponivel ? "Sim" : "Não") << endl;
         }
         aux = aux->prox;
     }
 }
 
-void buscaPorAutor(Estante* head, const string& autor) {
+// Função para buscar livros por autor
+void BuscaPorAutor(Estante* head, const string& autor) {
     Estante* aux = head;
     while (aux != nullptr) {
         if (aux->livro != nullptr && aux->livro->autor == autor) {
             cout << "Livro encontrado do autor '" << autor << "':" << endl;
-            cout << "Titulo: " << aux->livro->titulo << endl;
+            cout << "Título: " << aux->livro->titulo << endl;
         }
         aux = aux->prox;
     }
 }
 
-void alterarOrdenacaoParaPorTitulo(Estante*& head) {
+// Função para alterar a ordenação para "Por Título"
+void AlterarOrdenacaoParaPorTitulo(Estante*& head) {
     tipoOrdenacao = POR_TITULO;
 
     Estante* novaEstante = nullptr;
-    criaEstante(novaEstante);
+    CriaEstante(novaEstante);
     Estante* aux = head->prox;
 
     while (aux != nullptr) {
         Estante* prox = aux->prox;
-        insereLivroNaEstante(novaEstante, aux->livro);
+        InsereLivroNaEstante(novaEstante, aux->livro);
         aux = prox;
     }
 
@@ -155,16 +164,17 @@ void alterarOrdenacaoParaPorTitulo(Estante*& head) {
     ImprimeLista(head);
 }
 
-void alterarOrdenacaoParaPorAutor(Estante*& head) {
+// Função para alterar a ordenação para "Por Autor"
+void AlterarOrdenacaoParaPorAutor(Estante*& head) {
     tipoOrdenacao = POR_AUTOR;
 
     Estante* novaEstante = nullptr;
-    criaEstante(novaEstante);
+    CriaEstante(novaEstante);
     Estante* aux = head->prox;
 
     while (aux != nullptr) {
         Estante* prox = aux->prox;
-        insereLivroNaEstante(novaEstante, aux->livro);
+        InsereLivroNaEstante(novaEstante, aux->livro);
         aux = prox;
     }
 
@@ -181,16 +191,16 @@ void alterarOrdenacaoParaPorAutor(Estante*& head) {
 
 int main() {
     Estante* e = nullptr;
-    criaEstante(e);
+    CriaEstante(e);
 
     while (true) {
-        cout << "Escolha uma opcao:" << endl;
+        cout << "Escolha uma opção:" << endl;
         cout << "1. Adicionar livro" << endl;
         cout << "2. Remover livro" << endl;
-        cout << "3. Emprestimo e devolucao" << endl;
-        cout << "4. Busca por titulo" << endl;
+        cout << "3. Empréstimo e devolução" << endl;
+        cout << "4. Busca por título" << endl;
         cout << "5. Busca por autor" << endl;
-        cout << "6. Reordenar por titulo" << endl;
+        cout << "6. Reordenar por título" << endl;
         cout << "7. Reordenar por autor" << endl;
         cout << "8. Imprimir lista" << endl;
         cout << "9. Sair" << endl;
@@ -201,7 +211,7 @@ int main() {
         if (escolha == 1) {
             string titulo, autor;
             int isbn;
-            cout << "Digite o titulo do livro: ";
+            cout << "Digite o título do livro: ";
             cin.ignore(); // Limpar o buffer
             getline(cin, titulo);
             cout << "Digite o autor do livro: ";
@@ -209,40 +219,40 @@ int main() {
             cout << "Digite o ISBN do livro: ";
             cin >> isbn;
             Livro* novoLivro = nullptr;
-            criaLivro(novoLivro, titulo, autor, isbn);
-            insereLivroNaEstante(e, novoLivro);
+            CriaLivro(novoLivro, titulo, autor, isbn);
+            InsereLivroNaEstante(e, novoLivro);
         }
         else if (escolha == 2) {
             int isbn;
             cout << "Digite o ISBN do livro a ser removido: ";
             cin >> isbn;
-            removeLivroDaEstante(e, isbn);
+            RemoveLivroDaEstante(e, isbn);
         }
         else if (escolha == 3) {
             int isbn;
             cout << "Digite o ISBN do livro a ser atualizado: ";
             cin >> isbn;
-            atualizaStatusLivro(e, isbn);
+            AtualizaStatusLivro(e, isbn);
         }
         else if (escolha == 4) {
             string titulo;
-            cout << "Digite o titulo do livro a ser buscado: ";
+            cout << "Digite o título do livro a ser buscado: ";
             cin.ignore();
             getline(cin, titulo);
-            buscaPorTitulo(e, titulo);
+            BuscaPorTitulo(e, titulo);
         }
         else if (escolha == 5) {
             string autor;
             cout << "Digite o autor dos livros a serem buscados: ";
             cin.ignore();
             getline(cin, autor);
-            buscaPorAutor(e, autor);
+            BuscaPorAutor(e, autor);
         }
         else if (escolha == 6) {
-            alterarOrdenacaoParaPorTitulo(e);
+            AlterarOrdenacaoParaPorTitulo(e);
         }
         else if (escolha == 7) {
-            alterarOrdenacaoParaPorAutor(e);
+            AlterarOrdenacaoParaPorAutor(e);
         }
         else if (escolha == 8) {
             ImprimeLista(e);
@@ -251,7 +261,7 @@ int main() {
             break;
         }
         else {
-            cout << "Opcao invalida. Tente novamente." << endl;
+            cout << "Opção inválida. Tente novamente." << endl;
         }
     }
 
