@@ -26,7 +26,7 @@ void ImprimeLista(Estante* head) {
     Estante* aux = head->prox;
     while (aux != nullptr) {
         if (aux->livro != nullptr) {
-            cout << "Título: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponível: " << (aux->livro->disponivel ? "Sim" : "Não") << endl;
+            cout << "Titulo: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponivel: " << (aux->livro->disponivel ? "Sim" : "Nao") << endl;
         }
         aux = aux->prox;
     }
@@ -84,7 +84,7 @@ void RemoveLivroDaEstante(Estante*& head, int isbn) {
     }
 
     if (aux->prox == nullptr) {
-        cout << "O livro não está na estante" << endl;
+        cout << "O livro nao esta na estante" << endl;
     }
     else {
         exc = aux->prox;
@@ -96,7 +96,7 @@ void RemoveLivroDaEstante(Estante*& head, int isbn) {
     ImprimeLista(head);
 }
 
-// Função para atualizar o status de um livro (empréstimo/devolução)
+// Função para atualizar o status de um livro (emprestimo/devolucao)
 void AtualizaStatusLivro(Estante*& head, int isbn) {
     Estante* aux = head;
 
@@ -105,7 +105,7 @@ void AtualizaStatusLivro(Estante*& head, int isbn) {
     }
 
     if (aux->prox == nullptr) {
-        cout << "O livro não está na estante" << endl;
+        cout << "O livro nao esta na estante" << endl;
     }
     else {
         aux = aux->prox;
@@ -115,13 +115,13 @@ void AtualizaStatusLivro(Estante*& head, int isbn) {
     ImprimeLista(head);
 }
 
-// Função para buscar um livro pelo título
+// Função para buscar um livro pelo titulo
 void BuscaPorTitulo(Estante* head, const string& titulo) {
     Estante* aux = head;
     while (aux != nullptr) {
         if (aux->livro != nullptr && aux->livro->titulo == titulo) {
             cout << "Livro encontrado:" << endl;
-            cout << "Título: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponível: " << (aux->livro->disponivel ? "Sim" : "Não") << endl;
+            cout << "Titulo: " << aux->livro->titulo << ", Autor: " << aux->livro->autor << ", ISBN: " << aux->livro->isbn << ", Disponivel: " << (aux->livro->disponivel ? "Sim" : "Nao") << endl;
         }
         aux = aux->prox;
     }
@@ -133,13 +133,13 @@ void BuscaPorAutor(Estante* head, const string& autor) {
     while (aux != nullptr) {
         if (aux->livro != nullptr && aux->livro->autor == autor) {
             cout << "Livro encontrado do autor '" << autor << "':" << endl;
-            cout << "Título: " << aux->livro->titulo << endl;
+            cout << "Titulo: " << aux->livro->titulo << endl;
         }
         aux = aux->prox;
     }
 }
 
-// Função para alterar a ordenação para "Por Título"
+// Função para alterar a ordenação para "Por Titulo"
 void AlterarOrdenacaoParaPorTitulo(Estante*& head) {
     tipoOrdenacao = POR_TITULO;
 
@@ -194,13 +194,13 @@ int main() {
     CriaEstante(e);
 
     while (true) {
-        cout << "Escolha uma opção:" << endl;
+        cout << "Escolha uma opcao:" << endl;
         cout << "1. Adicionar livro" << endl;
         cout << "2. Remover livro" << endl;
-        cout << "3. Empréstimo e devolução" << endl;
-        cout << "4. Busca por título" << endl;
+        cout << "3. Emprestimo e devolucao" << endl;
+        cout << "4. Busca por titulo" << endl;
         cout << "5. Busca por autor" << endl;
-        cout << "6. Reordenar por título" << endl;
+        cout << "6. Reordenar por titulo" << endl;
         cout << "7. Reordenar por autor" << endl;
         cout << "8. Imprimir lista" << endl;
         cout << "9. Sair" << endl;
@@ -211,7 +211,7 @@ int main() {
         if (escolha == 1) {
             string titulo, autor;
             int isbn;
-            cout << "Digite o título do livro: ";
+            cout << "Digite o titulo do livro: ";
             cin.ignore(); // Limpar o buffer
             getline(cin, titulo);
             cout << "Digite o autor do livro: ";
@@ -236,7 +236,7 @@ int main() {
         }
         else if (escolha == 4) {
             string titulo;
-            cout << "Digite o título do livro a ser buscado: ";
+            cout << "Digite o titulo do livro a ser buscado: ";
             cin.ignore();
             getline(cin, titulo);
             BuscaPorTitulo(e, titulo);
@@ -261,7 +261,7 @@ int main() {
             break;
         }
         else {
-            cout << "Opção inválida. Tente novamente." << endl;
+            cout << "Opcao invalida. Tente novamente." << endl;
         }
     }
 
